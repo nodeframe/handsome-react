@@ -1,1 +1,1 @@
-{"version":3,"sources":["../src/index.js"],"names":["console","log"],"mappings":";;AAAAA,QAAQC,GAAR,CAAY,aAAZ","file":"index.js","sourcesContent":["console.log(\"Hello World\");"]}
+{"version":3,"sources":["../src/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA","file":"index.js","sourcesContent":["export * from './If';\n"]}
