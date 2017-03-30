@@ -20,6 +20,43 @@ export function Elif(props){
   return render(props);
 }
 
+export function Switch(props) {
+  const { children, condition } = props;
+
+  if (children == null) {
+    return null;
+  }
+
+  var render;
+  var isBreak;
+
+  React.Children.toArray(children).find(c => {
+    switch (c.type) {
+      case Case:
+        if (condition === c.props.value) {
+          render = c;
+        }
+        break;
+      default:
+        if(!render) {
+          render = c;
+        }
+        break;
+    }
+  })
+
+  return render || null
+}
+
+export function Default(props) {
+  return render(props)
+}
+
+export function Case(props) {
+  const { children } = props;
+  return render(props);
+}
+
 export function If(props) {
   const { children } = props;
 

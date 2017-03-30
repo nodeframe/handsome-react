@@ -1,7 +1,7 @@
 import 'jsdom-global/register';
 import React from 'react';
 import {expect} from 'chai';
-import {If,Else,Elif,Then} from '../src';
+import {If,Else,Elif,Then, Switch, Case, Default} from '../src';
 import { mount } from 'enzyme';
 
 
@@ -39,7 +39,7 @@ describe("If features",function(){
       )
       expect(wrapper.containsMatchingElement(<div>Child</div>)).to.equal(true)
     })
-  
+
   })
 
   describe("<If /> element with false condition",function(){
@@ -54,7 +54,7 @@ describe("If features",function(){
       expect(wrapper.containsMatchingElement(<div>Then</div>)).to.equal(false)
       expect(wrapper.containsMatchingElement(<div>Else</div>)).to.equal(true)
     })
-    
+
     it("should render correct elif",function(){
 
       const wrapper = mount (
@@ -72,8 +72,89 @@ describe("If features",function(){
       expect(wrapper.containsMatchingElement(<div>Elif 3</div>)).to.equal(false)
       expect(wrapper.containsMatchingElement(<div>Else</div>)).to.equal(false)
     })
-  
+
   })
 
-  
+  describe('<Switch>', function() {
+    it('should render corrent switch case', function() {
+      const wrapper = mount (
+        <Switch condition="1">
+          <Case value="1" break>
+            <div>
+              TEST_1
+            </div>
+          </Case>
+          <Case value="2" break>
+            <div>
+              TEST_2
+            </div>
+          </Case>
+          <Case value="3" break>
+            <div>
+              TEST_3
+            </div>
+          </Case>
+        </Switch>
+      )
+
+      expect(wrapper.containsMatchingElement(<div>TEST_1</div>)).to.equal(true)
+      expect(wrapper.containsMatchingElement(<div>TEST_2</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>TEST_3</div>)).to.equal(false)
+    })
+
+    it('should render defalut switch case', function() {
+      const wrapper = mount (
+        <Switch condition="4">
+          <Case value="1" break>
+            <div>
+              TEST_1
+            </div>
+          </Case>
+          <Case value="2" break>
+            <div>
+              TEST_2
+            </div>
+          </Case>
+          <Default>
+            <div>
+              Default
+            </div>
+          </Default>
+        </Switch>
+      )
+
+      expect(wrapper.containsMatchingElement(<div>TEST_1</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>TEST_2</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>Default</div>)).to.equal(true)
+    })
+
+    xit('should render no break condition switch case', function() {
+      const wrapper = mount (
+        <Switch condition="2">
+          <Case value="2" />
+          <Case value="1">
+            <div>
+              TEST_1
+            </div>
+          </Case>
+          <Case value="2" break>
+            <div>
+              TEST_2
+            </div>
+          </Case>
+          <Default>
+            <div>
+              Default
+            </div>
+          </Default>
+        </Switch>
+      )
+
+      expect(wrapper.containsMatchingElement(<div>TEST_1</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>TEST_2</div>)).to.equal(true)
+      expect(wrapper.containsMatchingElement(<div>Default</div>)).to.equal(false)
+    })
+  });
+
+
 })

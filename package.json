@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf libs/** && env NODE_ENV=production babel src/ -d libs -s",
     "start": "nodemon src/index.js --watch src --exec 'node_modules/.bin/eslint src && node_modules/.bin/babel-node'",
-    "test": "env NODE_ENV=development mocha --compilers js:babel-core/register"
+    "test": "env  mocha --compilers js:babel-core/register"
   },
   "author": "",
   "license": "ISC",
