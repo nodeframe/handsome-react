@@ -79,17 +79,17 @@ describe("If features",function(){
     it('should render corrent switch case', function() {
       const wrapper = mount (
         <Switch condition="1">
-          <Case value="1" break>
+          <Case value="1">
             <div>
               TEST_1
             </div>
           </Case>
-          <Case value="2" break>
+          <Case value="2">
             <div>
               TEST_2
             </div>
           </Case>
-          <Case value="3" break>
+          <Case value="3">
             <div>
               TEST_3
             </div>
@@ -105,12 +105,12 @@ describe("If features",function(){
     it('should render defalut switch case', function() {
       const wrapper = mount (
         <Switch condition="4">
-          <Case value="1" break>
+          <Case value="1">
             <div>
               TEST_1
             </div>
           </Case>
-          <Case value="2" break>
+          <Case value="2">
             <div>
               TEST_2
             </div>
@@ -137,7 +137,7 @@ describe("If features",function(){
               TEST_1
             </div>
           </Case>
-          <Case value="2" break>
+          <Case value="2">
             <div>
               TEST_2
             </div>
