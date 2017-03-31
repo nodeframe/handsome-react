@@ -14,7 +14,7 @@ yarn global add handsome-react
 #Component
 ## Proposal
 - [x] If
-- [ ] Switch Case
+- [x] Switch Case
 - [ ] Try Catch
 
 ##If
@@ -65,3 +65,31 @@ const Example = ({condition}) =>
   </If>
 ```
 
+
+##Switch
+Make switch case syntax in React Component read easier
+
+### Example
+
+Into
+```jsx
+import {Switch, Case, Default} from 'handsome-react';
+const Example = ({condition}) =>
+  <Switch condition={condition}>
+    <Case value="1" break>
+      <div>
+        TEST_1
+      </div>
+    </Case>
+    <Case value="2" break>
+      <div>
+        TEST_2
+      </div>
+    </Case>
+    <Default>
+      <div>
+        Default
+      </div>
+    </Default>
+  </Switch>
+```
