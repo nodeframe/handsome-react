@@ -79,17 +79,17 @@ describe("If features",function(){
     it('should render corrent switch case', function() {
       const wrapper = mount (
         <Switch condition="1">
-          <Case value="1">
+          <Case value="1" break>
             <div>
               TEST_1
             </div>
           </Case>
-          <Case value="2">
+          <Case value="2" break>
             <div>
               TEST_2
             </div>
           </Case>
-          <Case value="3">
+          <Case value="3" break>
             <div>
               TEST_3
             </div>
@@ -105,12 +105,12 @@ describe("If features",function(){
     it('should render defalut switch case', function() {
       const wrapper = mount (
         <Switch condition="4">
-          <Case value="1">
+          <Case value="1" break>
             <div>
               TEST_1
             </div>
           </Case>
-          <Case value="2">
+          <Case value="2" break>
             <div>
               TEST_2
             </div>
@@ -128,16 +128,16 @@ describe("If features",function(){
       expect(wrapper.containsMatchingElement(<div>Default</div>)).to.equal(true)
     })
 
-    xit('should render no break condition switch case', function() {
+    it('should render case duplicate value', function() {
       const wrapper = mount (
-        <Switch condition="2">
+        <Switch condition="1">
           <Case value="2" />
           <Case value="1">
             <div>
               TEST_1
             </div>
           </Case>
-          <Case value="2">
+          <Case value="2" break>
             <div>
               TEST_2
             </div>
@@ -154,7 +154,73 @@ describe("If features",function(){
       expect(wrapper.containsMatchingElement(<div>TEST_2</div>)).to.equal(true)
       expect(wrapper.containsMatchingElement(<div>Default</div>)).to.equal(false)
     })
+
+    it('should render last break condition switch case', function() {
+      const wrapper = mount (
+        <Switch condition="3">
+
+          <Case value="1" break>
+            <div>
+              TEST_1
+            </div>
+          </Case>
+          <Case value="2" />
+          <Case value="3" >
+            <div>
+              TEST_3
+            </div>
+          </Case>
+          <Case value="2" break>
+            <div>
+              TEST_2
+            </div>
+          </Case>
+          <Default>
+            <div>
+              Default
+            </div>
+          </Default>
+        </Switch>
+      )
+
+      expect(wrapper.containsMatchingElement(<div>TEST_1</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>TEST_2</div>)).to.equal(true)
+      expect(wrapper.containsMatchingElement(<div>TEST_3</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>Default</div>)).to.equal(false)
+    })
+
+    it('should render no break condition', function() {
+      const wrapper = mount (
+        <Switch condition="3">
+          <Case value="1" break>
+            <div>
+              TEST_1
+            </div>
+          </Case>
+          <Case value="2" />
+          <Case value="3" >
+            <div>
+              TEST_3
+            </div>
+          </Case>
+          <Case value="2" >
+            <div>
+              TEST_2
+            </div>
+          </Case>
+          <Default>
+            <div>
+              Default
+            </div>
+          </Default>
+        </Switch>
+      )
+      expect(wrapper.containsMatchingElement(<div>TEST_1</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>TEST_3</div>)).to.equal(false)
+      expect(wrapper.containsMatchingElement(<div>Default</div>)).to.equal(true)
+    })
   });
+
 
 
 })

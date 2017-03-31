@@ -28,13 +28,22 @@ export function Switch(props) {
   }
 
   var render;
-  var isBreak;
+  var isCase;
 
   React.Children.toArray(children).find(c => {
     switch (c.type) {
       case Case:
-        if (condition === c.props.value) {
-          render = c;
+        if(c.props.break) {
+          if (condition === c.props.value) {
+            render = c;
+            isCase = false
+          } else if(isCase) {
+            render = c;
+          }
+        } else {
+          if (condition === c.props.value) {
+            isCase = true;
+          }
         }
         break;
       default:
